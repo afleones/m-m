@@ -8,6 +8,7 @@ export default function Reception() {
       eyebrow="Recepción"
       venue={reception}
       actionLabel="Cómo llegar"
+      actionImage="/images/boton_ubicacion.png"
       icon={
         <svg
           xmlns="http://www.w3.org/2000/svg"

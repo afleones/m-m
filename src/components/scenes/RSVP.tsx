@@ -1,57 +1,58 @@
 "use client";
 
-import { motion } from "framer-motion";
-import PhotoFrame from "@/components/ui/PhotoFrame";
-import Button from "@/components/ui/Button";
+import Image from "next/image";
 import SectionReveal from "@/components/ui/SectionReveal";
-import { fiances } from "@/lib/content";
+import { fiances, rsvp } from "@/lib/content";
 import { buildWhatsAppLink } from "@/lib/whatsapp";
+
+const actionImages: Record<string, string> = {
+  novia: "/images/con_la_novia.png",
+  novio: "/images/con_el_novio.png",
+};
 
 export default function RSVP() {
   return (
     <section
       id="confirmacion"
-      className="bg-corrugated relative px-6 py-28 sm:py-36"
+      className="bg-corrugated relative px-6 py-16 sm:py-20"
     >
       <SectionReveal className="mx-auto max-w-2xl text-center" as="div">
-        <p className="font-sans text-xs uppercase tracking-[0.35em] text-navy/60">
-          Confirmación de asistencia
+        <Image
+          src="/images/confirmacion_asistencia.png"
+          alt="Confirmación de Asistencia"
+          width={2017}
+          height={780}
+          className="mx-auto h-auto w-full"
+        />
+        <p className="-mt-2 font-serif text-lg text-navy sm:text-xl">
+          Hasta el {rsvp.deadline}
         </p>
-        <h2 className="mt-4 font-serif text-3xl italic text-navy sm:text-4xl">
-          Nos encantaría contar contigo
-        </h2>
       </SectionReveal>
 
-      <div className="mx-auto mt-16 grid max-w-2xl gap-8 sm:grid-cols-2">
-        {fiances.map((fiance, index) => (
-          <motion.div
+      <div className="mx-auto mt-10 grid max-w-md grid-cols-2 gap-4 sm:max-w-xl sm:gap-8">
+        {fiances.map((fiance) => (
+          <a
             key={fiance.role}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.4 }}
-            transition={{ duration: 0.7, delay: index * 0.15, ease: "easeOut" }}
-            whileHover={{ y: -6 }}
-            className="flex flex-col items-center gap-5 rounded-lg border border-gold/30 bg-white/70 px-6 py-10 text-center shadow-[0_20px_60px_-30px_rgba(30,41,59,0.4)]"
+            href={buildWhatsAppLink(fiance.phone, fiance.message)}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`Confirmar con ${fiance.role === "novia" ? "la novia" : "el novio"}`}
+            className="transition-transform hover:scale-105 active:scale-95"
           >
-            <PhotoFrame
-              label={fiance.photoLabel}
-              aspect="square"
-              rounded="full"
-              className="w-32"
+            <Image
+              src={actionImages[fiance.role]}
+              alt={`Con ${fiance.role === "novia" ? "la Novia" : "el Novio"}`}
+              width={1536}
+              height={1024}
+              className="h-auto w-full"
             />
-            <h3 className="font-serif text-2xl text-navy">{fiance.name}</h3>
-            <Button
-              as="a"
-              href={buildWhatsAppLink(fiance.phone, fiance.message)}
-              target="_blank"
-              rel="noopener noreferrer"
-              variant="primary"
-            >
-              Confirmar con {fiance.role === "novia" ? "la novia" : "el novio"}
-            </Button>
-          </motion.div>
+          </a>
         ))}
       </div>
+
+      <p className="mt-8 text-center font-signature text-5xl text-envelope-deep sm:text-6xl">
+        {rsvp.closing}
+      </p>
     </section>
   );
 }

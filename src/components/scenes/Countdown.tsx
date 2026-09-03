@@ -32,17 +32,48 @@ function DigitFlip({ value }: { value: number }) {
   );
 }
 
+const weddingDate = new Date(WEDDING_DATE_ISO);
+const monthLabel = weddingDate.toLocaleDateString("es-ES", { month: "long" });
+const weekdayLabel = weddingDate.toLocaleDateString("es-ES", {
+  weekday: "long",
+});
+const dayLabel = weddingDate.getDate();
+const yearLabel = weddingDate.getFullYear();
+
 export default function Countdown() {
   const countdown = useCountdown(WEDDING_DATE_ISO);
 
   return (
     <section
       id="cuenta-regresiva"
-      className="bg-corrugated relative overflow-hidden px-6 py-28 text-center sm:py-36"
+      className="bg-corrugated relative overflow-hidden px-6 py-20 text-center sm:py-28"
     >
       <GoldParticles density={35} color="#5f85bf" />
 
       <SectionReveal className="relative mx-auto max-w-3xl">
+        <div className="mb-8 flex flex-col items-center gap-4">
+          <p className="font-serif text-4xl uppercase italic text-navy sm:text-6xl">
+            {monthLabel}
+          </p>
+          <div className="flex items-center justify-center gap-4 sm:gap-6">
+            <div className="flex items-center gap-3">
+              <span className="h-px w-10 bg-navy/30 sm:w-16" />
+              <span className="font-sans text-sm uppercase tracking-[0.3em] text-navy sm:text-base">
+                {weekdayLabel}
+              </span>
+            </div>
+            <span className="font-signature text-7xl text-envelope-deep sm:text-8xl">
+              {dayLabel}
+            </span>
+            <div className="flex items-center gap-3">
+              <span className="h-px w-10 bg-navy/30 sm:w-16" />
+              <span className="font-sans text-sm uppercase tracking-[0.3em] text-navy sm:text-base">
+                {yearLabel}
+              </span>
+            </div>
+          </div>
+        </div>
+
         <p className="font-sans text-xs uppercase tracking-[0.35em] text-navy/60">
           {countdown.isPast ? "Hoy celebramos" : "Faltan"}
         </p>
@@ -52,14 +83,14 @@ export default function Countdown() {
 
         <div
           aria-live="polite"
-          className="mt-14 grid grid-cols-2 gap-6 sm:grid-cols-4 sm:gap-10"
+          className="mt-10 grid grid-cols-4 gap-2 sm:gap-10"
         >
           {UNITS.map((unit) => (
             <div key={unit.key} className="flex flex-col items-center gap-2">
-              <div className="font-serif text-5xl tabular-nums text-envelope-deep sm:text-6xl">
+              <div className="font-serif text-3xl tabular-nums text-envelope-deep sm:text-6xl">
                 <DigitFlip value={countdown[unit.key]} />
               </div>
-              <span className="font-sans text-[10px] uppercase tracking-[0.3em] text-navy/50">
+              <span className="font-sans text-[8px] uppercase tracking-[0.1em] text-navy/50 sm:text-[10px] sm:tracking-[0.3em]">
                 {unit.label}
               </span>
             </div>

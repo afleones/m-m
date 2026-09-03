@@ -5,8 +5,13 @@ import Image from "next/image";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import PhotoFrame from "@/components/ui/PhotoFrame";
-import { couple, heroContent, letterContent, loveStory } from "@/lib/content";
+import {
+  couple,
+  heroContent,
+  letterContent,
+  loveStory,
+  parentsBlessing,
+} from "@/lib/content";
 import { useReducedMotion } from "@/lib/useReducedMotion";
 
 if (typeof window !== "undefined") {
@@ -23,36 +28,32 @@ if (typeof window !== "undefined") {
 // sino que "flota" por encima, más grande que el marco, como una guirnalda
 // que lo desborda. Izquierda y derecha (volteadas verticalmente) caen sobre
 // las esquinas inferiores.
-function FloralPhotoCard({ label }: { label: string }) {
+function FloralPhotoCard({ label, image }: { label: string; image: string }) {
   return (
     <div className="relative w-full">
-      <PhotoFrame label={label} aspect="portrait" rounded="none" className="w-full" />
+      <div className="photo-fade relative aspect-3/4 w-full overflow-hidden rounded-lg">
+        <Image src={image} alt={label} fill className="object-cover" />
+      </div>
 
       <div
-        className="pointer-events-none absolute left-1/2 top-0 z-10 overflow-hidden"
+        className="photo-fade pointer-events-none absolute left-1/2 top-0 z-10 -translate-x-1/2 -translate-y-[80px] sm:-translate-y-[150px] md:-translate-y-[150px] lg:-translate-y-[300px]"
         style={{
           width: "calc(100% + 3rem)",
-          // Desplazamiento en px fijos (no %) a propósito: la imagen es muy
-          // ancha (aspect 2:1) y en pantallas anchas un % de translateY se
-          // vuelve enorme (cientos de px) y termina tapando el texto de la
-          // sección anterior. Con px fijos el "asomo" de hojas es el mismo
-          // en cualquier ancho, y queda dentro del hueco que reserva mt-16.
-          transform: "translate(-50%, -500px)",
+          // Ancho a todo el ancho de pantalla (como al principio). El alto
+          // se recorta aparte (ver aspectRatio abajo): las flores del archivo
+          // están concentradas en la mitad inferior, así que object-position
+          // "bottom" muestra ese ramo y recorta el espacio vacío de arriba,
+          // reduciendo el alto total sin achicar las flores en sí. photo-fade
+          // difumina ese recorte para que no se note como un corte recto.
+          aspectRatio: "1774 / 550",
         }}
       >
-        {/* borde_inferior.png tiene flores tocando los 4 bordes de su propio
-            lienzo (sin margen transparente): se renderiza más ancha que este
-            contenedor y centrada, para que ese borde "cortado" del archivo
-            caiga fuera del área visible y aquí solo se vean flores completas. */}
-        <div style={{ width: "130%", marginLeft: "-15%" }}>
-          <Image
-            src="/images/borde_inferior.png"
-            alt=""
-            width={1774}
-            height={887}
-            style={{ width: "100%", height: "auto", display: "block" }}
-          />
-        </div>
+        <Image
+          src="/images/borde_inferior.png"
+          alt=""
+          fill
+          className="object-cover object-bottom"
+        />
       </div>
 
       <div className="pointer-events-none absolute bottom-0 left-0 z-10 w-[42%] max-w-[280px] -translate-x-[10%] translate-y-[6%] -scale-y-100 sm:w-[30%]">
@@ -136,9 +137,12 @@ export default function LoveStory() {
     <section
       ref={rootRef}
       id="historia"
-      className="bg-corrugated relative overflow-hidden px-6"
+      className="bg-corrugated relative overflow-hidden px-6 pt-24"
     >
-      <div className="mx-auto flex min-h-[88vh] max-w-xl flex-col items-center justify-center gap-3 text-center sm:min-h-[85vh]">
+      {/* pt-24 en la section: reserva espacio fijo arriba para que el
+          reproductor de audio (fixed, top-4, ~44px de alto) nunca tape la
+          cita, sin importar cuánto contenido tenga el bloque centrado de abajo. */}
+      <div className="mx-auto flex min-h-[88vh] max-w-xl flex-col items-center justify-center gap-1 pb-24 text-center sm:min-h-[85vh] sm:pb-32">
         <p className="font-serif text-2xl italic leading-relaxed text-navy/70 sm:text-3xl">
           &ldquo;{letterContent.verse.text}&rdquo;
         </p>
@@ -146,18 +150,18 @@ export default function LoveStory() {
           {letterContent.verse.reference}
         </span>
 
-        <div className="relative my-2 h-56 w-56 sm:h-72 sm:w-72 md:h-80 md:w-80">
+        <div className="relative h-100 w-100">
           <Image
             src="/images/logo.png"
             alt={`Monograma de ${couple.fullNames}`}
             fill
-            sizes="(min-width: 768px) 320px, (min-width: 640px) 288px, 224px"
+            sizes="400px"
             className="object-contain"
             priority
           />
         </div>
 
-        <p className="mt-2 font-signature text-5xl text-envelope-deep sm:text-6xl">
+        <p className="font-signature text-5xl text-envelope-deep sm:text-6xl">
           ¡Nos casamos!
         </p>
       </div>
@@ -168,7 +172,39 @@ export default function LoveStory() {
             aire y no tapen el texto del bloque anterior en ventanas bajas,
             donde ese bloque casi llena su min-h-[88vh]/[85vh]. */}
         <div className="mb-24 mt-16 sm:mt-20">
-          <FloralPhotoCard label={heroContent.photoLabel} />
+          <FloralPhotoCard label={heroContent.photoLabel} image={heroContent.image} />
+        </div>
+
+        <div className="mx-auto mb-24 max-w-2xl text-center">
+          <p className="font-serif text-2xl italic leading-relaxed text-navy/80 sm:text-3xl">
+            {parentsBlessing.blessingLine}
+          </p>
+
+          <div className="mx-auto mt-10 flex max-w-lg flex-col justify-center gap-8 sm:flex-row sm:gap-20">
+            <p className="font-serif text-xl leading-relaxed text-navy sm:text-2xl">
+              {parentsBlessing.groomParents[0]}
+              <br />& {parentsBlessing.groomParents[1]}
+            </p>
+            <p className="font-serif text-xl leading-relaxed text-navy sm:text-2xl">
+              {parentsBlessing.brideParents[0]} &
+              <br />
+              {parentsBlessing.brideParents[1]}
+            </p>
+          </div>
+
+          <p className="mt-10 font-serif text-2xl italic leading-relaxed text-navy/80 sm:text-3xl">
+            {parentsBlessing.invitationLine}
+          </p>
+
+          <div className="mx-auto mt-6 w-full max-w-md sm:max-w-2xl">
+            <Image
+              src="/images/marcosymaira.png"
+              alt={couple.fullNames}
+              width={2203}
+              height={714}
+              className="h-auto w-full"
+            />
+          </div>
         </div>
 
         <div className="mx-auto mb-20 max-w-2xl text-center">
@@ -194,7 +230,14 @@ export default function LoveStory() {
                   data-postcard-photo
                   className="w-full max-w-xs shrink-0 animate-float-slow"
                 >
-                  <PhotoFrame label={milestone.photoLabel} aspect="square" />
+                  <div className="photo-fade relative aspect-square w-full overflow-hidden rounded-lg">
+                    <Image
+                      src={milestone.image}
+                      alt={milestone.photoLabel}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
                 </div>
                 <div data-postcard-copy className="max-w-md space-y-3 text-center sm:text-left">
                   <span className="font-sans text-[11px] uppercase tracking-[0.3em] text-navy/50">

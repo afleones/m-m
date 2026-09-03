@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import Image from "next/image";
 import SectionReveal from "@/components/ui/SectionReveal";
 import Card from "@/components/ui/Card";
 import Button from "@/components/ui/Button";
@@ -11,6 +12,8 @@ interface VenueCardProps {
   icon: ReactNode;
   venue: VenueInfo;
   actionLabel: string;
+  /** Botón ilustrado (PNG) a usar en vez del botón de texto por defecto. */
+  actionImage?: string;
 }
 
 export default function VenueCard({
@@ -19,11 +22,12 @@ export default function VenueCard({
   icon,
   venue,
   actionLabel,
+  actionImage,
 }: VenueCardProps) {
   return (
     <section
       id={id}
-      className="bg-corrugated relative flex items-center justify-center px-6 py-24 sm:py-32"
+      className="bg-corrugated relative flex items-center justify-center px-6 py-16 sm:py-20"
     >
       <SectionReveal className="w-full max-w-md" as="div">
         <Card className="text-center">
@@ -45,16 +49,34 @@ export default function VenueCard({
               {venue.note}
             </p>
           )}
-          <Button
-            as="a"
-            href={buildMapsLink(venue.mapsQuery)}
-            target="_blank"
-            rel="noopener noreferrer"
-            variant="outline"
-            className="mt-8"
-          >
-            {actionLabel}
-          </Button>
+          {actionImage ? (
+            <a
+              href={buildMapsLink(venue.mapsQuery)}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={actionLabel}
+              className="mt-8 inline-block w-full max-w-xs transition-transform hover:scale-[1.02] active:scale-[0.98]"
+            >
+              <Image
+                src={actionImage}
+                alt={actionLabel}
+                width={1969}
+                height={799}
+                className="h-auto w-full"
+              />
+            </a>
+          ) : (
+            <Button
+              as="a"
+              href={buildMapsLink(venue.mapsQuery)}
+              target="_blank"
+              rel="noopener noreferrer"
+              variant="outline"
+              className="mt-8"
+            >
+              {actionLabel}
+            </Button>
+          )}
         </Card>
       </SectionReveal>
     </section>

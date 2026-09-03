@@ -39,8 +39,6 @@ const montserrat = Montserrat({
 
 export const metadata: Metadata = {
   title: "Boda Marcos & Maira",
-  description:
-    "Una invitación digital de boda para Marcos & Maira. Vive con nosotros esta historia de amor.",
 };
 
 export const viewport: Viewport = {

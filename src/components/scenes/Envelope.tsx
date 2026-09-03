@@ -124,9 +124,16 @@ export default function Envelope({ onOpen }: EnvelopeProps) {
           <GuestLine />
         </Suspense>
 
-        <span className="font-signature text-6xl leading-tight text-envelope-deep drop-shadow-[0_2px_10px_rgba(95,133,191,0.35)] sm:text-8xl">
-          {couple.fullNames}
-        </span>
+        <div className="w-full max-w-md sm:max-w-2xl">
+          <Image
+            src="/images/marcosymaira.png"
+            alt={couple.fullNames}
+            width={2203}
+            height={714}
+            className="h-auto w-full"
+            priority
+          />
+        </div>
 
         <div className="mt-2">
           <Divider ornament={<SprigOrnament />} />
@@ -236,7 +243,7 @@ export default function Envelope({ onOpen }: EnvelopeProps) {
               opacity: { duration: 0.5, delay: 0.9 },
               rotate: { duration: 1.1, delay: 0.9, ease: "easeOut" },
             }}
-            className="absolute inset-x-8 top-3 z-20 h-40 origin-bottom rounded-sm border border-envelope-deep/20 bg-white shadow-md sm:h-56"
+            className="bg-corrugated absolute inset-x-8 top-3 z-20 h-40 origin-bottom rounded-sm border border-envelope-deep/20 shadow-md sm:h-56"
           />
 
           {/* Sello de cera */}

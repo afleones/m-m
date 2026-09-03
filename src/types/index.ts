@@ -4,6 +4,7 @@ export interface LoveStoryMilestone {
   date: string;
   text: string;
   photoLabel: string;
+  image: string;
 }
 
 export interface VenueInfo {
@@ -20,5 +21,4 @@ export interface FianceInfo {
   role: "novia" | "novio";
   phone: string;
   message: string;
-  photoLabel: string;
 }

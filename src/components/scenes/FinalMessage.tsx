@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import PhotoFrame from "@/components/ui/PhotoFrame";
+import Image from "next/image";
 import { finalMessage } from "@/lib/content";
 
 export default function FinalMessage() {
@@ -17,13 +17,11 @@ export default function FinalMessage() {
         transition={{ duration: 1.6, ease: "easeOut" }}
         className="absolute inset-0"
       >
-        <PhotoFrame
-          label={finalMessage.photoLabel}
-          aspect="landscape"
-          variant="light"
-          rounded="none"
-          showCaption={false}
-          className="h-full w-full opacity-60"
+        <Image
+          src={finalMessage.image}
+          alt={finalMessage.photoLabel}
+          fill
+          className="object-cover opacity-60"
         />
         <div className="bg-gradient-to-b from-kraft-deep/60 via-kraft-deep/40 to-kraft-deep absolute inset-0" />
       </motion.div>

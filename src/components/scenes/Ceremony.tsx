@@ -7,7 +7,8 @@ export default function Ceremony() {
       id="ceremonia"
       eyebrow="Ceremonia"
       venue={ceremony}
-      actionLabel="Ver ubicación"
+      actionLabel="Cómo llegar"
+      actionImage="/images/boton_ubicacion.png"
       icon={
         <svg
           xmlns="http://www.w3.org/2000/svg"

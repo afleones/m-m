@@ -21,6 +21,8 @@ export const heroContent = {
   title: "Marcos & Maira",
   dateDisplay: "12 de junio de 2027", // TODO: fecha real formateada
   photoLabel: "Fotografía principal de Marcos y Maira",
+  // TODO: reemplazar por una foto real de la pareja
+  image: "/images/stock/hero-principal.jpg",
 };
 
 export const letterContent = {
@@ -35,6 +37,15 @@ export const letterContent = {
   signature: "Marcos & Maira",
 };
 
+// TODO: confirmar nombres reales de los padres
+export const parentsBlessing = {
+  blessingLine: "Con nuestro amor, la bendición de Dios y la de nuestros padres.",
+  groomParents: ["Luis Alberto Santodomingo", "Yadira Olivar"],
+  brideParents: ["Gustavo Navarro", "Luz Marina Claro"],
+  invitationLine: "Tenemos el honor de invitarte a celebrar nuestra boda.",
+};
+
+// TODO: reemplazar las imágenes de stock por fotos reales de la pareja
 export const loveStory: LoveStoryMilestone[] = [
   {
     id: "primer-encuentro",
@@ -42,6 +53,7 @@ export const loveStory: LoveStoryMilestone[] = [
     date: "TODO: fecha", // TODO
     text: "Dos caminos que, sin saberlo, ya se dirigían al mismo lugar.",
     photoLabel: "Fotografía del primer encuentro de Marcos y Maira",
+    image: "/images/stock/historia-encuentro.jpg",
   },
   {
     id: "primer-viaje",
@@ -49,6 +61,7 @@ export const loveStory: LoveStoryMilestone[] = [
     date: "TODO: fecha",
     text: "Descubrimos que el mundo es más bonito cuando se recorre en compañía.",
     photoLabel: "Fotografía del primer viaje juntos",
+    image: "/images/stock/historia-viaje.jpg",
   },
   {
     id: "primer-te-amo",
@@ -56,6 +69,7 @@ export const loveStory: LoveStoryMilestone[] = [
     date: "TODO: fecha",
     text: "Una frase pequeña que cambió el rumbo de nuestra historia.",
     photoLabel: "Fotografía de un momento íntimo de la pareja",
+    image: "/images/stock/historia-teamo.jpg",
   },
   {
     id: "propuesta",
@@ -63,6 +77,7 @@ export const loveStory: LoveStoryMilestone[] = [
     date: "TODO: fecha",
     text: "Una pregunta, un sí, y la certeza de que queríamos el resto de la vida juntos.",
     photoLabel: "Fotografía del momento de la propuesta de matrimonio",
+    image: "/images/stock/historia-propuesta.jpg",
   },
   {
     id: "boda",
@@ -70,6 +85,7 @@ export const loveStory: LoveStoryMilestone[] = [
     date: "TODO: fecha",
     text: "Y hoy, celebramos el capítulo que estábamos escribiendo desde el principio.",
     photoLabel: "Fotografía de la pareja vestida para su boda",
+    image: "/images/stock/historia-boda.jpg",
   },
 ];
 
@@ -91,23 +107,17 @@ export const reception: VenueInfo = {
   mapsQuery: "Salón de Eventos Villa Real, Ciudad", // TODO
 };
 
-export const dressCode = {
-  title: "Código de vestimenta",
-  formality: "Formal / Elegante", // TODO: confirmar
-  men: {
-    label: "Hombres",
-    items: ["Traje oscuro", "Camisa formal", "Corbata o corbatín"],
-  },
-  women: {
-    label: "Mujeres",
-    items: ["Vestido largo o midi", "Tonos elegantes", "Evitar el blanco"],
-  },
+export const gifts = {
+  title: "Regalo",
+  closing: "Lluvia de Sobres",
 };
 
-export const gifts = {
-  title: "Su presencia es nuestro mejor regalo",
-  subtitle:
-    "Si desean obsequiarnos algo, agradeceremos una lluvia de sobres.",
+// TODO: reemplazar por una foto real de la pareja vestida de blanco
+export const dressCodeImage = "/images/stock/vestimenta-pareja.jpg";
+
+export const rsvp = {
+  deadline: "2 de junio de 2027", // TODO: confirmar fecha límite real
+  closing: "¡Te esperamos!",
 };
 
 // TODO: reemplazar con los números de WhatsApp reales (formato internacional, sin '+', ej: 573001234567)
@@ -116,15 +126,13 @@ export const fiances: FianceInfo[] = [
     name: "Maira",
     role: "novia",
     phone: "573000000000", // TODO
-    message: "Hola Maira, confirmo mi asistencia a su boda.",
-    photoLabel: "Fotografía o avatar de Maira, la novia",
+    message: "¡Hola! Maira, Gracias por la invitación. Confirmo asistencia a tu Boda.",
   },
   {
     name: "Marcos",
     role: "novio",
     phone: "573000000001", // TODO
-    message: "Hola Marcos, confirmo mi asistencia a su boda.",
-    photoLabel: "Fotografía o avatar de Marcos, el novio",
+    message: "¡Hola! Marcos, Gracias por la invitación. Confirmo asistencia a tu Boda.",
   },
 ];
 
@@ -132,6 +140,8 @@ export const finalMessage = {
   text: "Gracias por acompañarnos en este capítulo de nuestra historia.",
   signature: "Marcos & Maira",
   photoLabel: "La mejor fotografía de la pareja, para el cierre de la experiencia",
+  // TODO: reemplazar por una foto real de la pareja
+  image: "/images/stock/final-mensaje.jpg",
 };
 
 // TODO: reemplazar por archivos de audio reales en /public/audio
