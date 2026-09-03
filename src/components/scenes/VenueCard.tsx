@@ -23,7 +23,7 @@ export default function VenueCard({
   return (
     <section
       id={id}
-      className="section-card-shadow bg-corrugated relative flex items-center justify-center px-6 py-24 sm:py-32"
+      className="bg-corrugated relative flex items-center justify-center px-6 py-24 sm:py-32"
     >
       <SectionReveal className="w-full max-w-md" as="div">
         <Card className="text-center">

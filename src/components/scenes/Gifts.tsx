@@ -45,7 +45,7 @@ export default function Gifts() {
   return (
     <section
       id="regalos"
-      className="section-card-shadow bg-corrugated relative overflow-hidden px-6 py-28 sm:py-36"
+      className="bg-corrugated relative overflow-hidden px-6 py-28 sm:py-36"
     >
       <div className="pointer-events-none absolute inset-0" aria-hidden="true">
         {floatingEnvelopes.map((envelope, index) => (

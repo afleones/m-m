@@ -2,6 +2,7 @@
 
 import { Suspense, useState, type ReactNode } from "react";
 import { useSearchParams } from "next/navigation";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import GoldParticles from "@/components/ui/GoldParticles";
 import WaxSeal from "@/components/ui/WaxSeal";
@@ -10,74 +11,6 @@ import { couple, heroContent } from "@/lib/content";
 
 interface EnvelopeProps {
   onOpen: () => void;
-}
-
-// Rosa estilizada: pétalos radiales superpuestos + botón central, en los
-// mismos tonos azules del sobre (en vez de una ilustración acuarelada).
-function RoseBloom({ cx, cy, scale = 1 }: { cx: number; cy: number; scale?: number }) {
-  const petalAngles = [0, 51, 102, 153, 204, 255, 306];
-  return (
-    <g transform={`translate(${cx} ${cy}) scale(${scale})`}>
-      {petalAngles.map((a, i) => (
-        <path
-          key={a}
-          d="M0,0 C-9,-5 -9,-15 0,-19 C9,-15 9,-5 0,0 Z"
-          transform={`rotate(${a}) translate(0 -2)`}
-          fill="var(--color-envelope)"
-          fillOpacity={i % 2 ? 0.7 : 0.85}
-          stroke="var(--color-envelope-deep)"
-          strokeOpacity="0.5"
-          strokeWidth="0.8"
-        />
-      ))}
-      <circle r="4" fill="var(--color-envelope-deep)" fillOpacity="0.55" />
-    </g>
-  );
-}
-
-// Ramillete decorativo para las esquinas de la página: tallo + hojas + moras
-// pequeñas + una rosa, resuelto en línea y relleno suave del azul del sobre
-// en vez de una ilustración acuarelada. `rotate-180` en el contenedor lo
-// reorienta para la esquina opuesta sin duplicar el dibujo.
-function FloralCorner({ className = "" }: { className?: string }) {
-  const leaves = [
-    { x: 18, y: 130, r: -35, s: 1.15 },
-    { x: 36, y: 102, r: 32, s: 0.95 },
-    { x: 28, y: 72, r: -22, s: 0.85 },
-  ];
-  const berries = [
-    { x: 55, y: 44, r: 3.4 },
-    { x: 64, y: 53, r: 2.6 },
-    { x: 47, y: 55, r: 2.8 },
-  ];
-
-  return (
-    <svg viewBox="0 0 120 160" className={className} aria-hidden="true" fill="none">
-      <path
-        d="M14,152 C34,120 22,92 32,64 C40,42 48,30 58,14"
-        stroke="var(--color-envelope-deep)"
-        strokeOpacity="0.45"
-        strokeWidth="1.4"
-        strokeLinecap="round"
-      />
-      {leaves.map(({ x, y, r, s }, i) => (
-        <path
-          key={i}
-          d="M0,0 C-7,-11 -7,-26 0,-36 C7,-26 7,-11 0,0 Z"
-          transform={`translate(${x} ${y}) rotate(${r}) scale(${s})`}
-          fill="var(--color-envelope-light)"
-          fillOpacity="0.75"
-          stroke="var(--color-envelope-deep)"
-          strokeOpacity="0.4"
-          strokeWidth="1"
-        />
-      ))}
-      {berries.map(({ x, y, r }, i) => (
-        <circle key={i} cx={x} cy={y} r={r} fill="var(--color-envelope-deep)" fillOpacity="0.6" />
-      ))}
-      <RoseBloom cx={62} cy={26} scale={1.3} />
-    </svg>
-  );
 }
 
 function SprigOrnament() {
@@ -130,14 +63,14 @@ function GuestLine() {
       transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
       className="mb-5 flex flex-col items-center gap-1 text-center"
     >
-      <p className="font-sans text-[11px] uppercase tracking-[0.3em] text-envelope-deep/60">
+      <p className="font-sans text-xs font-semibold uppercase tracking-[0.3em] text-envelope-deep/80">
         Esta invitación es para
       </p>
       <p className="font-script text-2xl text-envelope-deep sm:text-3xl">
         {guestName}
       </p>
       {hasSeats && (
-        <p className="font-sans text-sm normal-case tracking-normal text-envelope-deep/60">
+        <p className="font-sans text-base font-semibold normal-case tracking-normal text-envelope-deep sm:text-lg">
           Cupo: ({seats}) {seats === 1 ? "Persona" : "Personas"}
         </p>
       )}
@@ -147,13 +80,16 @@ function GuestLine() {
 
 export default function Envelope({ onOpen }: EnvelopeProps) {
   const [isOpening, setIsOpening] = useState(false);
-  const { playSealBreak } = useAudio();
+  const { playSealBreak, startMainTheme } = useAudio();
 
   const handleTap = () => {
     if (isOpening) return;
     setIsOpening(true);
     playSealBreak();
-    window.setTimeout(onOpen, 2500);
+    window.setTimeout(() => {
+      startMainTheme();
+      onOpen();
+    }, 2500);
   };
 
   return (
@@ -161,8 +97,22 @@ export default function Envelope({ onOpen }: EnvelopeProps) {
       <GoldParticles density={26} color="#5f85bf" />
 
       {/* Ramilletes en las esquinas de la página, apuntando hacia el sobre */}
-      <FloralCorner className="pointer-events-none absolute -top-6 -right-8 h-40 w-32 opacity-90 sm:-top-10 sm:-right-12 sm:h-56 sm:w-44" />
-      <FloralCorner className="pointer-events-none absolute -bottom-6 -left-8 h-40 w-32 rotate-180 opacity-90 sm:-bottom-10 sm:-left-12 sm:h-56 sm:w-44" />
+      <Image
+        src="/images/borde_superior_derecho_sobre.png"
+        alt=""
+        width={1536}
+        height={1024}
+        className="pointer-events-none absolute -top-4 -right-4 z-10 h-auto w-60 opacity-95 sm:-top-6 sm:-right-6 sm:w-80 md:w-96"
+        priority
+      />
+      <Image
+        src="/images/borde_inferior_izquierdo_sobre.png"
+        alt=""
+        width={1536}
+        height={1024}
+        className="pointer-events-none absolute -bottom-4 -left-4 z-10 h-auto w-60 opacity-95 sm:-bottom-6 sm:-left-6 sm:w-80 md:w-96"
+        priority
+      />
 
       <motion.div
         initial={{ opacity: 1, y: 0 }}

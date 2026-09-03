@@ -11,7 +11,7 @@ export default function RSVP() {
   return (
     <section
       id="confirmacion"
-      className="section-card-shadow bg-corrugated relative px-6 py-28 sm:py-36"
+      className="bg-corrugated relative px-6 py-28 sm:py-36"
     >
       <SectionReveal className="mx-auto max-w-2xl text-center" as="div">
         <p className="font-sans text-xs uppercase tracking-[0.35em] text-navy/60">

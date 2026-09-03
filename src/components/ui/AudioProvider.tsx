@@ -11,12 +11,19 @@ import {
 } from "react";
 import { audioAssets } from "@/lib/content";
 
+const VOLUME_STEP = 0.1;
+const DEFAULT_VOLUME = 1;
+
 interface AudioContextValue {
-  isMuted: boolean;
   hasStarted: boolean;
-  toggleMute: () => void;
+  isPlaying: boolean;
+  volume: number;
   playSealBreak: () => void;
   startMainTheme: () => void;
+  togglePlay: () => void;
+  restart: () => void;
+  increaseVolume: () => void;
+  decreaseVolume: () => void;
 }
 
 const AudioContext = createContext<AudioContextValue | null>(null);
@@ -28,8 +35,9 @@ const AudioContext = createContext<AudioContextValue | null>(null);
  * o por las políticas de autoplay del navegador.
  */
 export default function AudioProvider({ children }: { children: ReactNode }) {
-  const [isMuted, setIsMuted] = useState(false);
   const [hasStarted, setHasStarted] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [volume, setVolume] = useState(DEFAULT_VOLUME);
 
   const mainThemeRef = useRef<HTMLAudioElement | null>(null);
   const sealBreakRef = useRef<HTMLAudioElement | null>(null);
@@ -38,7 +46,9 @@ export default function AudioProvider({ children }: { children: ReactNode }) {
     if (!mainThemeRef.current && typeof window !== "undefined") {
       const audio = new Audio(audioAssets.mainTheme);
       audio.loop = true;
-      audio.volume = 0.4;
+      audio.volume = DEFAULT_VOLUME;
+      audio.addEventListener("play", () => setIsPlaying(true));
+      audio.addEventListener("pause", () => setIsPlaying(false));
       mainThemeRef.current = audio;
     }
     return mainThemeRef.current;
@@ -55,39 +65,79 @@ export default function AudioProvider({ children }: { children: ReactNode }) {
 
   const playSealBreak = useCallback(() => {
     const audio = ensureSealBreak();
-    if (!audio || isMuted) return;
+    if (!audio) return;
     audio.currentTime = 0;
     audio.play().catch(() => {
       // Archivo aún no disponible o autoplay bloqueado: se ignora en silencio.
     });
-  }, [ensureSealBreak, isMuted]);
+  }, [ensureSealBreak]);
 
   const startMainTheme = useCallback(() => {
     setHasStarted(true);
     const audio = ensureMainTheme();
-    if (!audio || isMuted) return;
+    if (!audio) return;
     audio.play().catch(() => {
       // Archivo aún no disponible o autoplay bloqueado: se ignora en silencio.
     });
-  }, [ensureMainTheme, isMuted]);
+  }, [ensureMainTheme]);
 
-  const toggleMute = useCallback(() => {
-    setIsMuted((prev) => {
-      const next = !prev;
-      if (mainThemeRef.current) {
-        if (next) {
-          mainThemeRef.current.pause();
-        } else {
-          mainThemeRef.current.play().catch(() => {});
-        }
-      }
-      return next;
-    });
+  const togglePlay = useCallback(() => {
+    const audio = ensureMainTheme();
+    if (!audio) return;
+    if (audio.paused) {
+      audio.play().catch(() => {});
+    } else {
+      audio.pause();
+    }
+  }, [ensureMainTheme]);
+
+  const restart = useCallback(() => {
+    const audio = mainThemeRef.current;
+    if (!audio) return;
+    audio.currentTime = 0;
+    audio.play().catch(() => {});
   }, []);
 
+  const applyVolume = useCallback((next: number) => {
+    const clamped = Math.min(1, Math.max(0, next));
+    setVolume(clamped);
+    if (mainThemeRef.current) {
+      mainThemeRef.current.volume = clamped;
+    }
+    return clamped;
+  }, []);
+
+  const increaseVolume = useCallback(() => {
+    applyVolume(volume + VOLUME_STEP);
+  }, [applyVolume, volume]);
+
+  const decreaseVolume = useCallback(() => {
+    applyVolume(volume - VOLUME_STEP);
+  }, [applyVolume, volume]);
+
   const value = useMemo(
-    () => ({ isMuted, hasStarted, toggleMute, playSealBreak, startMainTheme }),
-    [isMuted, hasStarted, toggleMute, playSealBreak, startMainTheme]
+    () => ({
+      hasStarted,
+      isPlaying,
+      volume,
+      playSealBreak,
+      startMainTheme,
+      togglePlay,
+      restart,
+      increaseVolume,
+      decreaseVolume,
+    }),
+    [
+      hasStarted,
+      isPlaying,
+      volume,
+      playSealBreak,
+      startMainTheme,
+      togglePlay,
+      restart,
+      increaseVolume,
+      decreaseVolume,
+    ]
   );
 
   return (

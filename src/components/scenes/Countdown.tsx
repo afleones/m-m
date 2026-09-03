@@ -38,7 +38,7 @@ export default function Countdown() {
   return (
     <section
       id="cuenta-regresiva"
-      className="section-card-shadow bg-corrugated relative overflow-hidden px-6 py-28 text-center sm:py-36"
+      className="bg-corrugated relative overflow-hidden px-6 py-28 text-center sm:py-36"
     >
       <GoldParticles density={35} color="#5f85bf" />
 
