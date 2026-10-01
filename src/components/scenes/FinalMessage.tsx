@@ -8,7 +8,7 @@ export default function FinalMessage() {
   return (
     <section
       id="gracias"
-      className="bg-corrugated relative flex min-h-screen items-center justify-center overflow-hidden px-6 py-24"
+      className="bg-corrugated relative flex min-h-screen items-end justify-center overflow-hidden px-6 pt-24 pb-6"
     >
       <motion.div
         initial={{ opacity: 0 }}
@@ -21,9 +21,9 @@ export default function FinalMessage() {
           src={finalMessage.image}
           alt={finalMessage.photoLabel}
           fill
-          className="object-cover opacity-60"
+          className="object-contain object-center opacity-85"
         />
-        <div className="bg-gradient-to-b from-kraft-deep/60 via-kraft-deep/40 to-kraft-deep absolute inset-0" />
+        <div className="absolute inset-0 bg-gradient-to-b from-kraft-deep/30 via-transparent to-kraft-deep/50" />
       </motion.div>
 
       <motion.div
@@ -31,7 +31,7 @@ export default function FinalMessage() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.5 }}
         transition={{ duration: 1.2, ease: "easeOut", delay: 0.3 }}
-        className="relative flex max-w-xl flex-col items-center gap-8 text-center"
+        className="relative flex max-w-xl flex-col items-center gap-8 pb-4 text-center sm:pb-8"
       >
         <p className="font-serif text-2xl italic leading-relaxed text-navy sm:text-3xl">
           {finalMessage.text}

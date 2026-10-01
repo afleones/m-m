@@ -171,7 +171,7 @@ html.lenis body {
    solo se difumina una franja angosta pegada a cada borde y el resto de la
    foto queda totalmente nítido y rectangular. */
 .photo-fade {
-  --photo-fade-size: 14%;
+  --photo-fade-size: 7%;
   -webkit-mask-image:
     linear-gradient(
       to right,

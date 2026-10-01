@@ -13,16 +13,15 @@ export const couple = {
   fullNames: "Marcos & Maira",
 };
 
-// TODO: reemplazar con la fecha y hora real de la boda (ISO 8601, zona horaria local del evento)
-export const WEDDING_DATE_ISO = "2027-06-12T17:00:00-05:00";
+export const WEDDING_DATE_ISO = "2026-11-14T20:00:00-05:00";
 
 export const heroContent = {
   eyebrow: "¡Nos casamos!",
   title: "Marcos & Maira",
-  dateDisplay: "12 de junio de 2027", // TODO: fecha real formateada
+  dateDisplay: "14 de noviembre de 2026",
   photoLabel: "Fotografía principal de Marcos y Maira",
   // TODO: reemplazar por una foto real de la pareja
-  image: "/images/stock/hero-principal.jpg",
+  image: "/images/stock/1.jpeg",
 };
 
 export const letterContent = {
@@ -40,72 +39,63 @@ export const letterContent = {
 // TODO: confirmar nombres reales de los padres
 export const parentsBlessing = {
   blessingLine: "Con nuestro amor, la bendición de Dios y la de nuestros padres.",
-  groomParents: ["Luis Alberto Santodomingo", "Yadira Olivar"],
-  brideParents: ["Gustavo Navarro", "Luz Marina Claro"],
+  groomParents: ["Silvia Sánchez", "Edgardo Escorcia"],
+  brideParents: ["Laudeth Sequeda", "Omar Sampayo"],
   invitationLine: "Tenemos el honor de invitarte a celebrar nuestra boda.",
 };
 
 // TODO: reemplazar las imágenes de stock por fotos reales de la pareja
 export const loveStory: LoveStoryMilestone[] = [
   {
-    id: "primer-encuentro",
-    title: "Primer encuentro",
-    date: "TODO: fecha", // TODO
-    text: "Dos caminos que, sin saberlo, ya se dirigían al mismo lugar.",
-    photoLabel: "Fotografía del primer encuentro de Marcos y Maira",
-    image: "/images/stock/historia-encuentro.jpg",
+    id: "amor-llega",
+    title: "El amor llega",
+    date: "",
+    text: "El amor no se busca; simplemente llega y lo transforma todo.",
+    photoLabel: "Fotografía de Marcos y Maira",
+    image: "/images/stock/2.jpeg",
   },
   {
-    id: "primer-viaje",
-    title: "Primer viaje",
-    date: "TODO: fecha",
-    text: "Descubrimos que el mundo es más bonito cuando se recorre en compañía.",
-    photoLabel: "Fotografía del primer viaje juntos",
-    image: "/images/stock/historia-viaje.jpg",
+    id: "lugar-favorito",
+    title: "Tu lugar favorito",
+    date: "",
+    text: "Amar es encontrar en la otra persona tu lugar favorito del mundo.",
+    photoLabel: "Fotografía de Marcos y Maira",
+    image: "/images/stock/3.jpeg",
   },
   {
-    id: "primer-te-amo",
-    title: "Primer 'te amo'",
-    date: "TODO: fecha",
-    text: "Una frase pequeña que cambió el rumbo de nuestra historia.",
-    photoLabel: "Fotografía de un momento íntimo de la pareja",
-    image: "/images/stock/historia-teamo.jpg",
+    id: "amor-verdadero",
+    title: "Amor verdadero",
+    date: "",
+    text: "El amor verdadero no es perfecto; es real, profundo e infinito.",
+    photoLabel: "Fotografía de Marcos y Maira",
+    image: "/images/stock/4.jpeg",
   },
   {
-    id: "propuesta",
-    title: "La propuesta",
-    date: "TODO: fecha",
-    text: "Una pregunta, un sí, y la certeza de que queríamos el resto de la vida juntos.",
-    photoLabel: "Fotografía del momento de la propuesta de matrimonio",
-    image: "/images/stock/historia-propuesta.jpg",
+    id: "promesa-eterna",
+    title: "Una promesa eterna",
+    date: "",
+    text: "Casarse es prometer quedarse, incluso cuando todo cambia.",
+    photoLabel: "Fotografía de Marcos y Maira",
+    image: "/images/stock/5.jpeg",
   },
   {
-    id: "boda",
-    title: "La boda",
-    date: "TODO: fecha",
-    text: "Y hoy, celebramos el capítulo que estábamos escribiendo desde el principio.",
-    photoLabel: "Fotografía de la pareja vestida para su boda",
-    image: "/images/stock/historia-boda.jpg",
+    id: "decision-mas-bonita",
+    title: "La decisión más bonita",
+    date: "",
+    text: "El matrimonio es la decisión más bonita que dos personas pueden tomar.",
+    photoLabel: "Fotografía de Marcos y Maira",
+    image: "/images/stock/6.jpeg",
   },
 ];
 
-// TODO: confirmar lugar, dirección, fecha y hora reales de la ceremonia
 export const ceremony: VenueInfo = {
-  name: "Iglesia Nuestra Señora del Rosario", // TODO
-  address: "Calle 10 # 5-20, Ciudad", // TODO
-  date: "12 de junio de 2027",
-  time: "5:00 p.m.",
-  mapsQuery: "Iglesia Nuestra Señora del Rosario, Ciudad", // TODO
+  name: "Lugar de la Ceremonia",
+  address: "Cra 12 #117-23, Barrio El Pueblito",
+  date: "14 de noviembre de 2026",
+  time: "8:00 p.m.",
+  mapsQuery: "Cra 12 #117-23 Barrio El Pueblito",
 };
 
-// TODO: confirmar lugar, dirección, fecha y hora reales de la recepción
-export const reception: VenueInfo = {
-  name: "Salón de Eventos Villa Real", // TODO
-  address: "Km 3 Vía Principal, Ciudad", // TODO
-  date: "12 de junio de 2027",
-  time: "7:00 p.m.",
-  mapsQuery: "Salón de Eventos Villa Real, Ciudad", // TODO
-};
 
 export const gifts = {
   title: "Regalo",
@@ -113,25 +103,24 @@ export const gifts = {
 };
 
 // TODO: reemplazar por una foto real de la pareja vestida de blanco
-export const dressCodeImage = "/images/stock/vestimenta-pareja.jpg";
+export const dressCodeImage = "/images/stock/8.jpeg";
 
 export const rsvp = {
   deadline: "2 de junio de 2027", // TODO: confirmar fecha límite real
   closing: "¡Te esperamos!",
 };
 
-// TODO: reemplazar con los números de WhatsApp reales (formato internacional, sin '+', ej: 573001234567)
 export const fiances: FianceInfo[] = [
   {
     name: "Maira",
     role: "novia",
-    phone: "573000000000", // TODO
+    phone: "573112541680",
     message: "¡Hola! Maira, Gracias por la invitación. Confirmo asistencia a tu Boda.",
   },
   {
     name: "Marcos",
     role: "novio",
-    phone: "573000000001", // TODO
+    phone: "573043288709",
     message: "¡Hola! Marcos, Gracias por la invitación. Confirmo asistencia a tu Boda.",
   },
 ];
@@ -141,7 +130,7 @@ export const finalMessage = {
   signature: "Marcos & Maira",
   photoLabel: "La mejor fotografía de la pareja, para el cierre de la experiencia",
   // TODO: reemplazar por una foto real de la pareja
-  image: "/images/stock/final-mensaje.jpg",
+  image: "/images/stock/7.jpeg",
 };
 
 // TODO: reemplazar por archivos de audio reales en /public/audio

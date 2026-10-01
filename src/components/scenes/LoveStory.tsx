@@ -230,7 +230,7 @@ export default function LoveStory() {
                   data-postcard-photo
                   className="w-full max-w-xs shrink-0 animate-float-slow"
                 >
-                  <div className="photo-fade relative aspect-square w-full overflow-hidden rounded-lg">
+                  <div className="photo-fade relative aspect-[4/5] w-full overflow-hidden rounded-lg">
                     <Image
                       src={milestone.image}
                       alt={milestone.photoLabel}
@@ -240,9 +240,11 @@ export default function LoveStory() {
                   </div>
                 </div>
                 <div data-postcard-copy className="max-w-md space-y-3 text-center sm:text-left">
-                  <span className="font-sans text-[11px] uppercase tracking-[0.3em] text-navy/50">
-                    {milestone.date}
-                  </span>
+                  {milestone.date && (
+                    <span className="font-sans text-[11px] uppercase tracking-[0.3em] text-navy/50">
+                      {milestone.date}
+                    </span>
+                  )}
                   <h3 className="font-serif text-2xl text-navy sm:text-3xl">
                     {milestone.title}
                   </h3>

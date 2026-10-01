@@ -3,7 +3,6 @@ import IntroGate from "@/components/scenes/IntroGate";
 import LoveStory from "@/components/scenes/LoveStory";
 import Countdown from "@/components/scenes/Countdown";
 import Ceremony from "@/components/scenes/Ceremony";
-import Reception from "@/components/scenes/Reception";
 import DressCode from "@/components/scenes/DressCode";
 import Gifts from "@/components/scenes/Gifts";
 import RSVP from "@/components/scenes/RSVP";
@@ -46,7 +45,6 @@ export default function Home() {
         <LoveStory />
         <Countdown />
         <Ceremony />
-        <Reception />
         <DressCode />
         <Gifts />
         <RSVP />
