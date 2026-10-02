@@ -8,22 +8,25 @@ export default function FinalMessage() {
   return (
     <section
       id="gracias"
-      className="bg-corrugated relative flex min-h-screen items-end justify-center overflow-hidden px-6 pt-24 pb-6"
+      className="bg-corrugated relative flex min-h-screen flex-col items-center justify-end overflow-hidden px-6 pt-16 pb-8 sm:pb-12"
     >
       <motion.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
-        viewport={{ once: true, amount: 0.4 }}
+        viewport={{ once: true, amount: 0.2 }}
         transition={{ duration: 1.6, ease: "easeOut" }}
-        className="absolute inset-0"
+        className="pointer-events-none absolute inset-0 flex items-center justify-center overflow-hidden"
       >
-        <Image
-          src={finalMessage.image}
-          alt={finalMessage.photoLabel}
-          fill
-          className="object-contain object-center opacity-85"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-kraft-deep/30 via-transparent to-kraft-deep/50" />
+        <div className="photo-fade-soft relative aspect-[1024/1536] h-full max-h-[82vh] w-auto max-w-[94vw]">
+          <Image
+            src={finalMessage.image}
+            alt={finalMessage.photoLabel}
+            fill
+            sizes="(max-width: 768px) 94vw, 680px"
+            className="object-cover opacity-90"
+            priority
+          />
+        </div>
       </motion.div>
 
       <motion.div
@@ -31,7 +34,7 @@ export default function FinalMessage() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.5 }}
         transition={{ duration: 1.2, ease: "easeOut", delay: 0.3 }}
-        className="relative flex max-w-xl flex-col items-center gap-8 pb-4 text-center sm:pb-8"
+        className="relative z-10 flex max-w-xl flex-col items-center gap-6 text-center sm:gap-8"
       >
         <p className="font-serif text-2xl italic leading-relaxed text-navy sm:text-3xl">
           {finalMessage.text}

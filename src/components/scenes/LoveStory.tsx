@@ -32,48 +32,7 @@ function FloralPhotoCard({ label, image }: { label: string; image: string }) {
   return (
     <div className="relative w-full">
       <div className="photo-fade relative aspect-3/4 w-full overflow-hidden rounded-lg">
-        <Image src={image} alt={label} fill className="object-cover" />
-      </div>
-
-      <div
-        className="photo-fade pointer-events-none absolute left-1/2 top-0 z-10 -translate-x-1/2 -translate-y-[80px] sm:-translate-y-[150px] md:-translate-y-[150px] lg:-translate-y-[300px]"
-        style={{
-          width: "calc(100% + 3rem)",
-          // Ancho a todo el ancho de pantalla (como al principio). El alto
-          // se recorta aparte (ver aspectRatio abajo): las flores del archivo
-          // están concentradas en la mitad inferior, así que object-position
-          // "bottom" muestra ese ramo y recorta el espacio vacío de arriba,
-          // reduciendo el alto total sin achicar las flores en sí. photo-fade
-          // difumina ese recorte para que no se note como un corte recto.
-          aspectRatio: "1774 / 550",
-        }}
-      >
-        <Image
-          src="/images/borde_inferior.png"
-          alt=""
-          fill
-          className="object-cover object-bottom"
-        />
-      </div>
-
-      <div className="pointer-events-none absolute bottom-0 left-0 z-10 w-[42%] max-w-[280px] -translate-x-[10%] translate-y-[6%] -scale-y-100 sm:w-[30%]">
-        <Image
-          src="/images/borde_izquierdo_fotos.png"
-          alt=""
-          width={1230}
-          height={1278}
-          className="h-auto w-full"
-        />
-      </div>
-
-      <div className="pointer-events-none absolute bottom-0 right-0 z-10 w-[38%] max-w-[260px] translate-x-[10%] translate-y-[6%] -scale-y-100 sm:w-[26%]">
-        <Image
-          src="/images/borde_derecho_fotos.png"
-          alt=""
-          width={1122}
-          height={1402}
-          className="h-auto w-full"
-        />
+        <Image src={image} alt={label} fill className="object-cover object-top" />
       </div>
     </div>
   );

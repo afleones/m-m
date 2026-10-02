@@ -106,7 +106,7 @@ export const gifts = {
 export const dressCodeImage = "/images/stock/8.jpeg";
 
 export const rsvp = {
-  deadline: "2 de junio de 2027", // TODO: confirmar fecha límite real
+  deadline: "1 de noviembre de 2026",
   closing: "¡Te esperamos!",
 };
 
