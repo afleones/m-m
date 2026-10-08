@@ -105,7 +105,7 @@ export default function CrearPage() {
               <input
                 id={namesId}
                 type="text"
-                placeholder="Ej: Andrés y Dalys"
+                placeholder="Ej: Rey Barvilampiño y Maira Se Va"
                 value={names}
                 onChange={(e) => setNames(e.target.value)}
                 className="w-full rounded-lg border border-envelope-deep/30 bg-ivory-deep px-4 py-3.5 font-serif text-lg text-navy placeholder-navy/35 outline-none transition-all duration-200 focus:border-gold focus:ring-2 focus:ring-gold/30"
